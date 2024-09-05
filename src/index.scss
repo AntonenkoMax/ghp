@@ -4,7 +4,9 @@ html, body, #root {
 
 body {
   margin: 0;
-  font-family: "Montserrat", sans-serif;
+  font-family: 'Noto Sans', sans-serif;
+  line-height: 1;
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -9,3 +9,10 @@ export interface UserState {
 export interface UserResponse {
   id: string;
 }
+
+export type UserIdPayload = string;
+
+export interface UserResponse {
+  login: string;
+  name: string | null;
+}

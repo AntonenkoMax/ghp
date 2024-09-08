@@ -1,15 +1,22 @@
 import { Provider } from "react-redux";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { StyleSheetManager } from "styled-components";
 
 import store from "./store/store";
 import Navigation from "./navigation";
+import { GlobalStyle } from "./styles";
+
+import { shouldForwardProp } from "utils/helpers";
 
 const Root: React.FC = () => {
   return (
-    <div className="App">
-      <Provider store={store}>
-        <Navigation />
-      </Provider>
+    <div>
+      <GlobalStyle />
+      <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <Provider store={store}>
+          <Navigation />
+        </Provider>
+      </StyleSheetManager>
     </div>
   );
 };

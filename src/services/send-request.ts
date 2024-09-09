@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig, isAxiosError, AxiosResponse } from "axios";
+import { toast } from "react-toastify";
 import { ErrorResult } from "./types";
 
 export const sendRequest = async <Response>({
@@ -10,13 +11,14 @@ export const sendRequest = async <Response>({
   [p: string]: any;
 }) => {
   try {
-    const config: AxiosRequestConfig = {
+    const _config: AxiosRequestConfig = {
       method: method,
       url: url,
       data: data,
+      ...config,
     };
 
-    const response = (await axios(config)) as AxiosResponse<Response>;
+    const response = (await axios(_config)) as AxiosResponse<Response>;
 
     return response.data;
   } catch (error) {
@@ -33,6 +35,8 @@ export const sendRequest = async <Response>({
         errorObj.message = error.message;
       }
     }
+
+    toast.error(`${errorObj.message}`);
 
     return errorObj;
   }

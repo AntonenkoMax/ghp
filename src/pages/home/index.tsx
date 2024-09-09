@@ -1,27 +1,12 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 import { Text, Flex, Input, Button } from "components";
 import { StyledForm } from "./styled";
+import { useHandleData } from "./hooks";
 
-import { useAppDispatch } from "../../store/store";
-import { getUserData } from "../../store/user/actions";
-
-const Home = () => {
-  const [inputValue, setInputValue] = useState("");
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // navigate(inputValue);
-    dispatch(getUserData("AntonenkoMax12345678"));
-    // dispatch(getUserData("1212122121212122121"));
-  };
+const Home: React.FC = () => {
+  const { inputValue, inputChangeHandler, submitHandler, keyDownHandler } =
+    useHandleData();
 
   return (
     <Flex justifyContent="center" alignItems="center" height="100%" py="120px">
@@ -34,18 +19,13 @@ const Home = () => {
           Enter GitHub profile name
         </Text>
 
-        <StyledForm onSubmit={handleSubmit}>
+        <StyledForm onSubmit={submitHandler}>
           <Input
             mb="14px"
             value={inputValue}
             placeholder={"Enter Name"}
-            onChange={handleInputChange}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                e.preventDefault();
-                navigate(inputValue);
-              }
-            }}
+            onChange={inputChangeHandler}
+            onKeyDown={keyDownHandler}
           />
 
           <Button width="100%" type="submit">

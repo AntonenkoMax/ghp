@@ -13,6 +13,7 @@ import { GlobalStyle } from "./styles";
 import "react-toastify/dist/ReactToastify.css";
 
 const Root: React.FC = () => {
+  console.log("1");
   return (
     <div>
       <GlobalStyle />
